@@ -125,9 +125,6 @@ plot = sns.heatmap(correlation, annot = True, fmt=".1%", lineWidths=0.6)
 # Gerando o gráfico de distribuição dos resultados
 sns.histplot(data=scores, kde=True)
 
-# Carregando o modelo treinado
-modelo = pickle.load(open('modelo_mobile_price_classification.pkl', 'rb'))
-
 st.write('Insira as informações do celular para obter a previsão de preço')
 
 # Opções do formulário
@@ -143,7 +140,7 @@ tela = st.slider('Tamanho da Tela (polegadas)', 3, 8, 5, 0.5)
 features = np.array([bateria, camera_frontal, camera_traseira, memoria_interna, nucleos, ram, tela]).reshape(1,-1)
 
 # Previsão do preço
-preco = modelo.predict(features)
+preco = clf.predict(features)
 
 # Mostrando o resultado para o usuário
 st.write('')
