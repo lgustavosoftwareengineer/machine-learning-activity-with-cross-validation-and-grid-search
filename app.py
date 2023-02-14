@@ -23,7 +23,7 @@ slt.subheader("Plotando um histograma para todos os atributos numérico presente
 numeric_cols = data.select_dtypes(include='number').columns.tolist()
 
 data[numeric_cols].hist(bins=20, figsize=(10,10))
-st.pyplot()
+slt.pyplot()
 
 
 slt.subheader("Definindo as variáveis independentes (X) e a variável dependente (y):")
