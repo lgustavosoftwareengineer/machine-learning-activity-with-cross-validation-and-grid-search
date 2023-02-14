@@ -25,7 +25,7 @@ slt.write(data.info())
 
 slt.subheader("Plotando um histograma para cada atributo numérico presente na base de dados.")
 fig, ax = plt.subplots(figsize=(15, 2))
-sns.countplot(x=["battery_power", "blue", "int_memory", "px_height", "px_width", "ram", "touch_screen", "wifi"], data=data, ax=ax)
+sns.countplot(x="price_range", data=data, ax=ax)
 slt.write(fig)
 
 
