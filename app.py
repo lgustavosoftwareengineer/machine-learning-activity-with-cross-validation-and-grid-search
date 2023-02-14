@@ -8,6 +8,9 @@ import seaborn as sns
 from pandas.plotting import scatter_matrix
 import streamlit as slt
 
+# disabling showPyplotGlobalUse
+slt.set_option('deprecation.showPyplotGlobalUse', False)
+
 slt.title("Atividade com ChatGPT")
 
 slt.header("Utilizando o CrossValidation")
