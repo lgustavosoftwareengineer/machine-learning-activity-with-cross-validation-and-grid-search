@@ -26,6 +26,9 @@ import streamlit as st
 import numpy as np
 import pickle
 
+from sklearn.model_selection import train_test_split, GridSearchCV
+
+
 """Carregando a base de dados:"""
 
 url = 'https://gist.githubusercontent.com/tonicprism/95bc1a6de11c9ede0530d250828d24b5/raw/8ae4d8cae2b6a957933956b1e17c9424f641e771/mobile_price_classification.csv'
@@ -76,7 +79,6 @@ O objetivo da técnica `GridSearch` é otimizar os **hiperparâmetros** (parâme
 Importando o `sklearn.model_selection`, `train_test_split` e `GridSearchCV`
 """
 
-from sklearn.model_selection import train_test_split, GridSearchCV
 
 # Dividindo em treino e teste
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
