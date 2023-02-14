@@ -118,3 +118,15 @@ plot = sns.heatmap(correlation, annot = True, fmt=".1%", lineWidths=0.6)
 
 # Gerando o gráfico de distribuição dos resultados
 sns.histplot(data=scores, kde=True)
+
+import streamlit as st
+
+# Create input form
+battery_power = st.slider("Battery power", 500, 3500, 1500)
+clock_speed = st.slider("Clock speed", 0.5, 3.0, 1.0)
+fc = st.slider("Front camera megapixels", 0, 20, 5)
+ram = st.slider("RAM in GB", 0, 10, 2)
+n_cores = st.slider("Number of cores", 1, 8, 4)
+int_memory = st.slider("Internal memory in GB", 2, 64, 16)
+px_height = st.slider("Pixel height", 0, 2000, 800)
+px_width = st.slider("Pixel width", 
