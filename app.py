@@ -1,3 +1,7 @@
+!pip install pandas
+!pip install numpy
+!pip install scikit-learn
+
 # -*- coding: utf-8 -*-
 """Atividade com ChatGPT.ipynb
 
