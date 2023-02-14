@@ -20,7 +20,7 @@ slt.subheader("As colunas da base de dados:")
 slt.write(data.head())
 
 slt.subheader("Informações sobre a base de dados (número total de linhas, o tipo de cada atributo e o número de valores não nulos):")
-slt.write(data.info())
+slt.dataframe(data.info())
 
 
 slt.subheader("Plotando um histograma para cada atributo numérico presente na base de dados.")
