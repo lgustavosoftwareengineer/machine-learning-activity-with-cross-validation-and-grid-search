@@ -1,7 +1,3 @@
-!pip install pandas
-!pip install numpy
-!pip install scikit-learn
-
 # -*- coding: utf-8 -*-
 """Atividade com ChatGPT.ipynb
 
@@ -25,6 +21,10 @@ from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pandas.plotting import scatter_matrix
+
+import streamlit as st
+import numpy as np
+import pickle
 
 """Carregando a base de dados:"""
 
@@ -123,14 +123,31 @@ plot = sns.heatmap(correlation, annot = True, fmt=".1%", lineWidths=0.6)
 # Gerando o gráfico de distribuição dos resultados
 sns.histplot(data=scores, kde=True)
 
-import streamlit as st
+# Carregando o modelo treinado
+modelo = pickle.load(open('modelo_mobile_price_classification.pkl', 'rb'))
 
-# Create input form
-battery_power = st.slider("Battery power", 500, 3500, 1500)
-clock_speed = st.slider("Clock speed", 0.5, 3.0, 1.0)
-fc = st.slider("Front camera megapixels", 0, 20, 5)
-ram = st.slider("RAM in GB", 0, 10, 2)
-n_cores = st.slider("Number of cores", 1, 8, 4)
-int_memory = st.slider("Internal memory in GB", 2, 64, 16)
-px_height = st.slider("Pixel height", 0, 2000, 800)
-px_width = st.slider("Pixel width", 
+st.write('Insira as informações do celular para obter a previsão de preço')
+
+# Opções do formulário
+bateria = st.slider('Bateria (mAh)', 500, 5000, 2000, 100)
+camera_frontal = st.slider('Câmera Frontal (MP)', 0, 20, 5, 1)
+camera_traseira = st.slider('Câmera Traseira (MP)', 0, 50, 12, 1)
+memoria_interna = st.slider('Memória Interna (GB)', 1, 256, 16, 1)
+nucleos = st.slider('Núcleos do Processador', 1, 8, 4, 1)
+ram = st.slider('RAM (GB)', 1, 8, 2, 1)
+tela = st.slider('Tamanho da Tela (polegadas)', 3, 8, 5, 0.5)
+
+# Obtendo as informações inseridas pelo usuário
+features = np.array([bateria, camera_frontal, camera_traseira, memoria_interna, nucleos, ram, tela]).reshape(1,-1)
+
+# Previsão do preço
+preco = modelo.predict(features)
+
+# Mostrando o resultado para o usuário
+st.write('')
+st.write('### Previsão de Preço')
+st.write('R$', preco[0])
+
+if __name__ == '__main__':
+    main()
+
