@@ -1,6 +1,6 @@
 pandas
 sklearn
-matplotlib.pyplot
+matplotlib
 seaborn 
 
 streamlit
