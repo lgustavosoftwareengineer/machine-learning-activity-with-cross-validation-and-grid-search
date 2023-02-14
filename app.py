@@ -22,13 +22,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pandas.plotting import scatter_matrix
 
-import streamlit as st
-import numpy as np
-import pickle
-
-from sklearn.model_selection import train_test_split, GridSearchCV
-
-
 """Carregando a base de dados:"""
 
 url = 'https://gist.githubusercontent.com/tonicprism/95bc1a6de11c9ede0530d250828d24b5/raw/8ae4d8cae2b6a957933956b1e17c9424f641e771/mobile_price_classification.csv'
@@ -79,6 +72,7 @@ O objetivo da técnica `GridSearch` é otimizar os **hiperparâmetros** (parâme
 Importando o `sklearn.model_selection`, `train_test_split` e `GridSearchCV`
 """
 
+from sklearn.model_selection import train_test_split, GridSearchCV
 
 # Dividindo em treino e teste
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
@@ -124,39 +118,3 @@ plot = sns.heatmap(correlation, annot = True, fmt=".1%", lineWidths=0.6)
 
 # Gerando o gráfico de distribuição dos resultados
 sns.histplot(data=scores, kde=True)
-
-st.write('Insira as informações do celular para obter a previsão de preço')
-
-# Exibindo os resultados
-st.title("Previsão de preço de celulares")
-
-# Formulário para inserir informações sobre o celular
-battery_power = st.number_input("Digite a capacidade da bateria (em mAh):")
-ram = st.number_input("Digite a quantidade de RAM (em GB):")
-storage = st.number_input("Digite a quantidade de armazenamento interno (em GB):")
-clock_speed = st.number_input("Digite a velocidade do processador (em GHz):")
-touch_screen = st.selectbox("Possui tela touch screen?", ["Sim", "Não"])
-if touch_screen == "Sim":
-    touch_screen = 1
-else:
-    touch_screen = 0
-wifi = st.selectbox("Possui conexão Wi-Fi?", ["Sim", "Não"])
-if wifi == "Sim":
-    wifi = 1
-else:
-    wifi = 0
-
-# Realizando a previsão de preço
-pred = grid_search.predict([[battery_power, clock_speed, ram, storage, touch_screen, wifi]])
-
-# Exibindo a previsão de preço
-st.write("O preço previsto para o celular é:", pred[0])
-
-# Exibindo a matriz de confusão
-plot_confusion_matrix(grid_search, X_test, y_test)
-st.pyplot()
-
-# Exibindo o relatório de classificação
-st.subheader("Relatório de Classificação")
-st.text(classification_report(y_test, grid.predict(X_test)))
-
