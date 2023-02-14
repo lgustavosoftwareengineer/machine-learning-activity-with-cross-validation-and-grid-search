@@ -112,7 +112,7 @@ correlation = data.corr()
 
 print(correlation)
 
-plot = sns.heatmap(correlation, annot = True, fmt=".1%", lineWidths=0.6)
+plot = sns.heatmap(correlation, annot = True, fmt=".1%")
 
 """Gerando um historiograma com o resultado do uso das técnicas."""
 
