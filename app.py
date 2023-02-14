@@ -127,26 +127,36 @@ sns.histplot(data=scores, kde=True)
 
 st.write('Insira as informações do celular para obter a previsão de preço')
 
-# Opções do formulário
-bateria = st.slider('Bateria (mAh)', 500, 5000, 2000, 100)
-camera_frontal = st.slider('Câmera Frontal (MP)', 0, 20, 5, 1)
-camera_traseira = st.slider('Câmera Traseira (MP)', 0, 50, 12, 1)
-memoria_interna = st.slider('Memória Interna (GB)', 1, 256, 16, 1)
-nucleos = st.slider('Núcleos do Processador', 1, 8, 4, 1)
-ram = st.slider('RAM (GB)', 1, 8, 2, 1)
-tela = st.slider('Tamanho da Tela (polegadas)', 3, 8, 5, 0.5)
+# Exibindo os resultados
+st.title("Previsão de preço de celulares")
 
-# Obtendo as informações inseridas pelo usuário
-features = np.array([bateria, camera_frontal, camera_traseira, memoria_interna, nucleos, ram, tela]).reshape(1,-1)
+# Formulário para inserir informações sobre o celular
+battery_power = st.number_input("Digite a capacidade da bateria (em mAh):")
+ram = st.number_input("Digite a quantidade de RAM (em GB):")
+storage = st.number_input("Digite a quantidade de armazenamento interno (em GB):")
+clock_speed = st.number_input("Digite a velocidade do processador (em GHz):")
+touch_screen = st.selectbox("Possui tela touch screen?", ["Sim", "Não"])
+if touch_screen == "Sim":
+    touch_screen = 1
+else:
+    touch_screen = 0
+wifi = st.selectbox("Possui conexão Wi-Fi?", ["Sim", "Não"])
+if wifi == "Sim":
+    wifi = 1
+else:
+    wifi = 0
 
-# Previsão do preço
-preco = clf.predict(features)
+# Realizando a previsão de preço
+pred = grid_search.predict([[battery_power, clock_speed, ram, storage, touch_screen, wifi]])
 
-# Mostrando o resultado para o usuário
-st.write('')
-st.write('### Previsão de Preço')
-st.write('R$', preco[0])
+# Exibindo a previsão de preço
+st.write("O preço previsto para o celular é:", pred[0])
 
-if __name__ == '__main__':
-    main()
+# Exibindo a matriz de confusão
+plot_confusion_matrix(grid_search, X_test, y_test)
+st.pyplot()
+
+# Exibindo o relatório de classificação
+st.subheader("Relatório de Classificação")
+st.text(classification_report(y_test, grid.predict(X_test)))
 
