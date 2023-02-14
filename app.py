@@ -89,9 +89,11 @@ results = pd.DataFrame(grid_search.cv_results_)
 slt.subheader("Tabela com os resultados: ")
 slt.write(results[['params', 'mean_test_score', 'std_test_score', 'rank_test_score']])
 
+correlation = data.corr()
+
 slt.subheader("Gráfico com a correlação dos atributos da minha base de dado: ")
 slt.write("Esse gráfico indica o grau de relação entre elas (quanto menor a porcentagem, menor o grau de relação entre o elemento da linha vertical e linha horizontal).")
-slt.write(data.corr())
+slt.write(correlation)
 
 slt.subheader("Historiograma com o resultado do uso das técnicas: ")
 slt.write(sns.heatmap(correlation, annot = True, fmt=".1%"))
