@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
-slt.title("Atividade com ChatGPT")
-
-
-slt.header("Utilizando o CrossValidation")
-slt.write("O objetivo da `CrossValidation` é avaliar o desempenho do modelo através de uma divisão do conjunto de dados em vários subconjuntos para que o modelo possa ser treinado e avaliado várias vezes em diferentes partições do conjunto de dados. Sendo o objetivo principal obter uma estimativa mais precisa do desempenho do modelo em dados não vistos.")
-
 import pandas as pd
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pandas.plotting import scatter_matrix
+import streamlit as slt
+
+slt.title("Atividade com ChatGPT")
+
+slt.header("Utilizando o CrossValidation")
+slt.write("O objetivo da `CrossValidation` é avaliar o desempenho do modelo através de uma divisão do conjunto de dados em vários subconjuntos para que o modelo possa ser treinado e avaliado várias vezes em diferentes partições do conjunto de dados. Sendo o objetivo principal obter uma estimativa mais precisa do desempenho do modelo em dados não vistos.")
 
 url = 'https://gist.githubusercontent.com/tonicprism/95bc1a6de11c9ede0530d250828d24b5/raw/8ae4d8cae2b6a957933956b1e17c9424f641e771/mobile_price_classification.csv'
 data = pd.read_csv(url)
