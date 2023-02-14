@@ -24,8 +24,9 @@ slt.write(data.info())
 
 
 slt.subheader("Plotando um histograma para cada atributo numérico presente na base de dados.")
-data.hist(bins=50, figsize=(20,15))
-slt.write(plt.show())
+fig, ax = plt.subplots(figsize=(15, 2))
+sns.countplot(x="Type 1", data=data, ax=ax)
+slt.write(fig)
 
 
 slt.subheader("Definindo as variáveis independentes (X) e a variável dependente (y):")
@@ -96,7 +97,12 @@ slt.write("Esse gráfico indica o grau de relação entre elas (quanto menor a p
 slt.write(correlation)
 
 slt.subheader("Historiograma com o resultado do uso das técnicas: ")
-slt.write(sns.heatmap(correlation, annot = True, fmt=".1%"))
+fig, ax = plt.subplots()
+sns.heatmap(df.corr(), ax=ax, annot = True, fmt=".1%")
+slt.write(fig)
+
 
 slt.subheader("Gráfico de distribuição dos resultados: ")
-slt.write(sns.histplot(data=scores, kde=True))
+fig, ax = plt.subplots()
+sns.histplot(data=scores, ax=ax, kde=True)
+slt.write(fig)
