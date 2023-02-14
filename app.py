@@ -19,14 +19,17 @@ data = pd.read_csv(url)
 slt.subheader("As colunas da base de dados:")
 slt.write(data.head())
 
-slt.subheader("Informações sobre a base de dados (número total de linhas, o tipo de cada atributo e o número de valores não nulos):")
-slt.dataframe(data.info())
-
-
 slt.subheader("Plotando um histograma para cada atributo numérico presente na base de dados.")
-fig, ax = plt.subplots(figsize=(15, 2))
-sns.countplot(x="price_range", data=data, ax=ax)
-slt.write(fig)
+# fig, ax = plt.subplots(figsize=(15, 2))
+# sns.countplot(x="price_range", data=data, ax=ax)
+# slt.write(fig)
+numeric_cols = data.select_dtypes(include='number').columns.tolist()
+
+# Plot histogram for each numeric column
+for col in numeric_cols:
+    plt.hist(data[col], bins=20)
+    plt.title(col)
+    slt.pyplot()
 
 
 slt.subheader("Definindo as variáveis independentes (X) e a variável dependente (y):")
